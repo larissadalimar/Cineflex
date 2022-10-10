@@ -13,9 +13,9 @@ const Footer = styled.div`
     border: 1px solid #9EADBA;
 
     color: #293845;
-    p {
 
-    font-size: 26px;
+    p {
+        font-size: 23px;
     }
 
 
@@ -25,7 +25,7 @@ const Footer = styled.div`
     flex-wrap: wrap;
     
 
-    div {
+    div:nth-child(1) {
         width: 64px;
         height: 89px;
         background-color: white;
