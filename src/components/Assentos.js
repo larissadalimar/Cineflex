@@ -6,16 +6,11 @@ import axios from "axios";
 import Footer from "./Footer";
 
 
-export default function Assentos(){
+export default function Assentos({form, setForm, filme, setFilme}){
 
     const { idSessao } = useParams()
     const [assentos, setAssentos] = useState({})
     const [statusAssentos, setStatusAssentos] = useState([])
-    const [form, setForm] = useState({
-        ids: [],
-        name: '',
-        cpf: '',
-    });
     
     const navigate = useNavigate()
 
@@ -28,6 +23,13 @@ export default function Assentos(){
 
     function reserva(e){
         e.preventDefault()
+
+        setFilme({
+            name: assentos.movie.title,
+            hour: assentos.name,
+            day: assentos.day.date
+        })
+
         const promise = axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", form)
 
         promise.then((response) => {
@@ -85,9 +87,7 @@ export default function Assentos(){
 
             setAssentos(response.data)
             setStatusAssentos(response.data.seats)
-            console.log(response.data)
-        }
-        )
+        })
 
         promise.catch((err) => 
             console.log(err)
@@ -125,7 +125,7 @@ export default function Assentos(){
                     <form onSubmit={reserva}>
                         <div>
                             <label htmlFor="name">Nome do comprador:</label>
-                            <input type="text" name="Nome" onChange={handleForm} value={form.description} required placeholder="Digite seu nome..."/>
+                            <input type="text" name="name" onChange={handleForm} value={form.name} required placeholder="Digite seu nome..."/>
                         </div>
                         <div>
                             <label htmlFor="name">CPF do comprador:</label>
